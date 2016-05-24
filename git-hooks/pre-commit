@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Analyze code before creating new commit
+read -p "Do you wants to generate code analysis? " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then 
+  rubyversion=$(cat ".ruby-version")
+
+  source "$HOME/.rvm/scripts/rvm"
+  rvm use "$rubyversion"
+  bundle exec rubycritic
+fi
+
+# Append branch name to all commits for following JIRA workflow convention
+
